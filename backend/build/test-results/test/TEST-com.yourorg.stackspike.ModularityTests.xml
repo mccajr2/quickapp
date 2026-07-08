@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.yourorg.stackspike.ModularityTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-08T03:02:32.721Z" hostname="Jasons-MacBook-Air.local" time="0.463">
+  <properties/>
+  <testcase name="verifyModularStructure()" classname="com.yourorg.stackspike.ModularityTests" time="0.458"/>
+  <system-out><![CDATA[23:02:32.778 [Test worker] INFO com.tngtech.archunit.core.PluginLoader -- Detected Java version 25.0.3
+# Greeting
+> Logical name: greeting
+> Base package: com.yourorg.stackspike.greeting
+> Excluded packages: none
+> Spring beans:
+  o ….internal.GreetingService
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,14 @@
+rootProject.name = "stack-spike"
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+file("backend/modules").listFiles()?.filter { it.isDirectory }?.forEach { dir ->
+    include(":${dir.name}")
+    project(":${dir.name}").projectDir = dir
+}
+
+include(":backend")
