@@ -99,14 +99,14 @@ confirm both UIs show the backend greeting string.
 
 ## Tasks
 
-- [ ] **Backend:** Add `spring-boot-starter-web` to `backend/modules/greeting/build.gradle.kts`.
-- [ ] **Backend:** Create `GreetingController` in `com.yourorg.stackspike.greeting` (public
+- [x] **Backend:** Add `spring-boot-starter-web` to `backend/modules/greeting/build.gradle.kts`.
+- [x] **Backend:** Create `GreetingController` in `com.yourorg.stackspike.greeting` (public
       package) with `GET /api/greeting`, delegating to `GreetingApi`.
-- [ ] **Backend:** Add response DTO record/class in the public package.
-- [ ] **Backend:** Add `@SpringBootTest` + MockMvc integration test for the endpoint.
-- [ ] **Backend:** Run `./gradlew :backend:test --tests ModularityTests` and full backend
+- [x] **Backend:** Add response DTO record/class in the public package.
+- [x] **Backend:** Add `@SpringBootTest` + MockMvc integration test for the endpoint.
+- [x] **Backend:** Run `./gradlew :backend:test --tests ModularityTests` and full backend
       test suite.
-- [ ] **Contract:** Create `contracts/openapi.yaml` with the greeting endpoint spec.
+- [x] **Contract:** Create `contracts/openapi.yaml` with the greeting endpoint spec.
 - [ ] **Mobile/sharedLogic:** Add Ktor client dependencies to `mobile/gradle/libs.versions.toml`
       and `sharedLogic/build.gradle.kts` (ask before adding if versions are not already present).
 - [ ] **Mobile/sharedLogic:** Implement base-URL `expect`/`actual` for Android vs iOS localhost.
