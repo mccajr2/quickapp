@@ -87,12 +87,11 @@ confirm both UIs show the backend greeting string.
       schema; it matches the implemented backend behavior.
 - [x] `mobile/sharedLogic` contains a shared HTTP client that calls the greeting endpoint
       and parses the response — not a platform-specific fetch in `androidApp` or `iosApp`.
-- [ ] Android app (emulator, backend running on host) displays the backend greeting
+- [x] Android app (emulator, backend running on host) displays the backend greeting
       message (not the local `sayHello()` string) after user interaction triggers the fetch.
-      *(Requires manual smoke — see checklist below.)*
-- [ ] iOS app (simulator, backend running on host) displays the same backend greeting
-      message via the same shared client code path. *(Requires manual smoke — see checklist
-      below.)*
+      *(Verified manually 2026-07-10.)*
+- [x] iOS app (simulator, backend running on host) displays the same backend greeting
+      message via the same shared client code path. *(Verified manually 2026-07-10.)*
 - [x] `ModularityTests` still passes — greeting controller and service remain within
       module boundaries.
 - [x] Backend integration test (MockMvc) passes for the new endpoint.
@@ -151,24 +150,33 @@ curl "http://localhost:8080/api/greeting?name=Android"
 # → {"message":"Hello, Android, from a Spring Modulith module."}
 ```
 
-### Manual smoke checklist
+### Manual smoke checklist (verified 2026-07-10)
 
 Prerequisites: backend running on host port 8080 (`./gradlew :backend:bootRun` from repo root).
 
 **Android (emulator)**
-1. [ ] Start Android emulator.
-2. [ ] Install/run debug app: `cd mobile && ./gradlew :androidApp:installDebug` (or Run from IDE).
-3. [ ] Tap **Click me!**
-4. [ ] Confirm text shows `Compose: Hello, Android …, from a Spring Modulith module.`
-      (not `Hello, Android …!` from local `sayHello()`).
-5. [ ] Stop backend → tap again → confirm minimal error string appears (not a crash).
+1. [x] Start Android emulator.
+2. [x] Install/run debug app (Android Studio run config `androidApp`).
+3. [x] Tap **Click me!**
+4. [x] Confirmed: `Compose: Hello, Android 37, from a Spring Modulith module.`
+5. [x] Backend stopped → tap again → short error string (no crash).
 
 **iOS (simulator)**
-1. [ ] Open `mobile/iosApp` in Xcode, run on iOS Simulator.
-2. [ ] Tap **Click me!**
-3. [ ] Confirm text shows `SwiftUI: Hello, iOS …, from a Spring Modulith module.`
-      (platform name varies; must include `from a Spring Modulith module`).
-4. [ ] Stop backend → tap again → confirm minimal error string appears (not a crash).
+1. [x] Open `mobile/iosApp` in Xcode, run on iOS Simulator.
+2. [x] Tap **Click me!**
+3. [x] Confirmed: `SwiftUI: Hello, iOS 26.5, from a Spring Modulith module.`
+4. [x] Backend stopped → tap again → verbose error string from Darwin/Ktor (no crash).
+      *(Acceptable for spike; normalize in sharedLogic in a follow-up.)*
+
+## Follow-ups (deferred)
+
+- **Normalize network error messages** in `sharedLogic` so Android and iOS show consistent
+  user-facing copy (Darwin engine messages are verbose; OkHttp messages are short).
+- **OpenAPI codegen** for mobile/web clients once a second endpoint exists.
+- **Web client scaffold** (`web/`) — required before next contract change per AGENTS.md.
+- **CI workflows** (path-filtered GitHub Actions for backend + mobile).
+- **`docs/architecture.md`** — document the SDD loop and when to add contract validation.
+- **Contract linter in CI** — when web exists or codegen is adopted.
 
 ## Open questions
 
