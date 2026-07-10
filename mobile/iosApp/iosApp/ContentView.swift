@@ -3,11 +3,28 @@ import SharedLogic
 
 struct ContentView: View {
     @State private var showContent = false
+    @State private var greetingText: String?
+    @State private var errorText: String?
+
+    private var greetingDisplayText: String {
+        if let errorText {
+            return "SwiftUI: Error: \(errorText)"
+        }
+        if let greetingText {
+            return "SwiftUI: \(greetingText)"
+        }
+        return "SwiftUI: Loading..."
+    }
+
     var body: some View {
         VStack {
             Button("Click me!") {
                 withAnimation {
-                    showContent = !showContent
+                    showContent.toggle()
+                    if !showContent {
+                        greetingText = nil
+                        errorText = nil
+                    }
                 }
             }
 
@@ -16,9 +33,16 @@ struct ContentView: View {
                     Image(systemName: "swift")
                         .font(.system(size: 200))
                         .foregroundColor(.accentColor)
-                    Text("SwiftUI: \(Greeting().greet())")
+                    Text(greetingDisplayText)
                 }
                 .transition(.move(edge: .top).combined(with: .opacity))
+                .onAppear {
+                    guard greetingText == nil, errorText == nil else { return }
+                    GreetingBridge().fetchGreeting(
+                        onSuccess: { greetingText = $0 },
+                        onError: { errorText = $0 }
+                    )
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)

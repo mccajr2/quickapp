@@ -35,13 +35,29 @@ fun App() {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
+                var greeting by remember { mutableStateOf<String?>(null) }
+                var error by remember { mutableStateOf<String?>(null) }
+
+                LaunchedEffect(Unit) {
+                    try {
+                        greeting = Greeting().greet()
+                    } catch (e: Exception) {
+                        error = e.message ?: "Request failed"
+                    }
+                }
+
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text(
+                        when {
+                            error != null -> "Compose: Error: $error"
+                            greeting == null -> "Compose: Loading..."
+                            else -> "Compose: $greeting"
+                        },
+                    )
                 }
             }
         }
