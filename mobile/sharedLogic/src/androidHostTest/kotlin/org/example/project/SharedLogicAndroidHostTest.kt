@@ -6,7 +6,7 @@ import kotlin.test.assertEquals
 class SharedLogicAndroidHostTest {
 
     @Test
-    fun example() {
-        assertEquals(3, 1 + 2)
+    fun apiBaseUrlPointsAtEmulatorHostLoopback() {
+        assertEquals("http://10.0.2.2:8080", apiBaseUrl())
     }
 }

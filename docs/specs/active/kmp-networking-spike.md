@@ -107,13 +107,13 @@ confirm both UIs show the backend greeting string.
 - [x] **Backend:** Run `./gradlew :backend:test --tests ModularityTests` and full backend
       test suite.
 - [x] **Contract:** Create `contracts/openapi.yaml` with the greeting endpoint spec.
-- [ ] **Mobile/sharedLogic:** Add Ktor client dependencies to `mobile/gradle/libs.versions.toml`
+- [x] **Mobile/sharedLogic:** Add Ktor client dependencies to `mobile/gradle/libs.versions.toml`
       and `sharedLogic/build.gradle.kts` (ask before adding if versions are not already present).
-- [ ] **Mobile/sharedLogic:** Implement base-URL `expect`/`actual` for Android vs iOS localhost.
-- [ ] **Mobile/sharedLogic:** Implement `GreetingClient` (or equivalent) with suspend fetch + JSON parse.
-- [ ] **Mobile/sharedLogic:** Wire `Greeting` (or new facade) to call remote API; keep platform
+- [x] **Mobile/sharedLogic:** Implement base-URL `expect`/`actual` for Android vs iOS localhost.
+- [x] **Mobile/sharedLogic:** Implement `GreetingClient` (or equivalent) with suspend fetch + JSON parse.
+- [x] **Mobile/sharedLogic:** Wire `Greeting` (or new facade) to call remote API; keep platform
       name as the `name` query parameter.
-- [ ] **Mobile/sharedLogic:** Add `commonTest` with Ktor `MockEngine` covering happy path.
+- [x] **Mobile/sharedLogic:** Add `commonTest` with Ktor `MockEngine` covering happy path.
 - [ ] **Android:** Add `INTERNET` permission and cleartext-traffic allowance for localhost.
 - [ ] **Android:** Update `sharedUI` `App()` to fetch and display remote greeting asynchronously.
 - [ ] **iOS:** Add ATS localhost exception to `Info.plist`.
@@ -123,8 +123,7 @@ confirm both UIs show the backend greeting string.
 
 ## Open questions
 
-1. **Ktor dependency approval.** Ktor is the de facto KMP HTTP client but is not yet in
-   `mobile/gradle/libs.versions.toml`. Confirm version choice before implementation.
+1. ~~**Ktor dependency approval.**~~ Resolved: Ktor **3.5.1** (Kotlin 2.4 compatibility fix in KTOR-9646).
 2. **iOS coroutine bridge.** Calling `suspend` Kotlin from SwiftUI requires a small
    wrapper (e.g. `suspendWrapper` with completion handler, or SKIE/KMP-NativeCoroutines).
    Pick the lightest option that works for the spike — avoid introducing a heavy bridge
