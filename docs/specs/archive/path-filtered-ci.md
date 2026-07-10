@@ -1,7 +1,8 @@
 # Spec: path-filtered-ci
 
-Status: draft
+Status: done
 Created: 2026-07-10
+Completed: 2026-07-10
 
 ## Problem
 
@@ -49,20 +50,20 @@ No OpenAPI changes.
 
 ## Acceptance criteria
 
-- [ ] `.github/workflows/backend.yml` exists and runs `:backend:test` on
+- [x] `.github/workflows/backend.yml` exists and runs `:backend:test` on
       `ubuntu-latest` for PRs and pushes to `main` when backend-related paths change.
-- [ ] `.github/workflows/mobile.yml` exists and runs
+- [x] `.github/workflows/mobile.yml` exists and runs
       `:sharedLogic:testAndroidHostTest` and `:androidApp:assembleDebug` on
       `ubuntu-latest` for PRs and pushes to `main` when `mobile/**` changes.
-- [ ] A docs-only or unrelated-path change does not start the irrelevant workflow
+- [x] A docs-only or unrelated-path change does not start the irrelevant workflow
       (path filters work as configured).
-- [ ] Workflows use checked-in Gradle wrappers; no inventing undeclared CI-only
+- [x] Workflows use checked-in Gradle wrappers; no inventing undeclared CI-only
       dependencies beyond Actions (`actions/checkout`, `actions/setup-java`, and
       Android setup as needed).
-- [ ] `docs/architecture.md` “Not built yet” / CI section updated to reflect that
+- [x] `docs/architecture.md` “Not built yet” / CI section updated to reflect that
       path-filtered PR + `main` CI exists; iOS/web/contract lint still listed as
       follow-ups.
-- [ ] Spec notes (or architecture) include the manual steps: push `main` to remote,
+- [x] Spec notes (or architecture) include the manual steps: push `main` to remote,
       then protect `main` (PR required, no force-push/delete).
 
 ## Tasks
@@ -72,9 +73,21 @@ No OpenAPI changes.
       sharedLogic Android host tests + `assembleDebug`).
 - [x] **Docs:** Update `docs/architecture.md` — CI present; remaining gaps; operator
       setup for remote + branch protection.
-- [ ] **Verify:** Confirm workflow YAML is valid (actionlint if available, or dry-read
+- [x] **Verify:** Confirm workflow YAML is valid (actionlint if available, or dry-read
       against GitHub Actions schema / local sanity). Note that a live green run on
       GitHub requires the remote push (operator step).
+
+## Verification notes
+
+- **actionlint v1.7.12** — no findings on `.github/workflows/backend.yml` or
+  `mobile.yml` (one-shot download; not added as a repo dependency).
+- **Local command parity** — `./gradlew :backend:test` and
+  `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug`
+  both succeeded during implementation.
+- **Acceptance dry-read** — 23 structural checks covering path filters, allowed
+  Actions, architecture CI/operator docs, and task commands all passed.
+- **Still operator-side** — after push, confirm green workflow runs on GitHub, then
+  apply classic branch protection on `main` (see Operator setup).
 
 ## Operator setup (manual, after merge)
 
