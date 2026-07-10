@@ -67,7 +67,7 @@ No OpenAPI changes.
 
 ## Tasks
 
-- [ ] **CI:** Add `.github/workflows/backend.yml` (path filters, JDK 25, `:backend:test`).
+- [x] **CI:** Add `.github/workflows/backend.yml` (path filters, JDK 25, `:backend:test`).
 - [ ] **CI:** Add `.github/workflows/mobile.yml` (path filters, JDK + Android SDK,
       sharedLogic Android host tests + `assembleDebug`).
 - [ ] **Docs:** Update `docs/architecture.md` — CI present; remaining gaps; operator
