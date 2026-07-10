@@ -1,0 +1,20 @@
+---
+description: Reactive web frontend conventions.
+globs: web/**
+alwaysApply: false
+---
+
+# Web (reactive frontend)
+
+- API calls go through the generated/hand-written client in `web/src/api/`, which
+  is generated from or hand-kept in sync with `contracts/openapi.yaml`. Never hand-roll
+  a fetch call to a backend endpoint outside that client.
+- [FILL IN: your state management pattern — e.g. "server state via React Query,
+  local UI state via useState/signals, no global store for server data."]
+- [FILL IN: component structure convention — e.g. "one component per file, colocated
+  test file, colocated styles."]
+- New component with any logic (not pure presentational) → component test with
+  Testing Library. New user-facing flow → Playwright e2e test.
+- Loading/error/empty states are required for every data-fetching component, not
+  an afterthought — write them in the same pass as the happy path.
+- Run lint + unit tests before calling frontend work done.
