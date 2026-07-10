@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		0905B426858DB7389CA989CF /* kmp-spike.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kmp-spike.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0905B426858DB7389CA989CF /* quickapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quickapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -59,7 +59,7 @@
 		EB1CD474242A13D7B11475F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0905B426858DB7389CA989CF /* kmp-spike.app */,
+				0905B426858DB7389CA989CF /* quickapp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +87,7 @@
 			packageProductDependencies = (
 			);
 			productName = iosApp;
-			productReference = 0905B426858DB7389CA989CF /* kmp-spike.app */;
+			productReference = 0905B426858DB7389CA989CF /* quickapp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

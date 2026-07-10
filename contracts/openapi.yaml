@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Stack Spike API
+  title: Quickapp API
   version: 0.1.0
   description: >
-    Contract-first API for stack-spike. This spike documents the greeting
+    Contract-first API for quickapp. This spike documents the greeting
     harness endpoint used to verify cross-stack networking.
 servers:
   - url: http://localhost:8080

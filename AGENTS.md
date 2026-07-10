@@ -1,11 +1,15 @@
-# AGENTS.md — [PROJECT NAME]
+# AGENTS.md — quickapp
 
 This file is the constitution. It changes rarely — only when a real architectural
 decision changes, not per-feature.
 
 ## What this is
 
-[ONE PARAGRAPH: what the app does, who it's for.]
+**quickapp** is a reusable, spec-driven starter for full-stack products: a Spring
+Modulith backend, Kotlin Multiplatform mobile (Android + iOS), an OpenAPI contract,
+and (soon) a web client. Clone it to spin up a new app; extend it with vertical
+modules and `/spec` → `/implement` workflows. The `greeting` harness is disposable
+proof of the toolchain, not the product.
 
 ## Stack
 

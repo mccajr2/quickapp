@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.spring.dependency.management)
 }
 
-group = "com.yourorg.stackspike"
+group = "com.yourorg.quickapp"
 java { toolchain { languageVersion = JavaLanguageVersion.of(25) } }
 
 dependencies {

@@ -1,4 +1,4 @@
-rootProject.name = "kmp-spike"
+rootProject.name = "quickapp"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {

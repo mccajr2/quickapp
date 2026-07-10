@@ -102,7 +102,7 @@ confirm both UIs show the backend greeting string.
 ## Tasks
 
 - [x] **Backend:** Add `spring-boot-starter-web` to `backend/modules/greeting/build.gradle.kts`.
-- [x] **Backend:** Create `GreetingController` in `com.yourorg.stackspike.greeting` (public
+- [x] **Backend:** Create `GreetingController` in `com.yourorg.quickapp.greeting` (public
       package) with `GET /api/greeting`, delegating to `GreetingApi`.
 - [x] **Backend:** Add response DTO record/class in the public package.
 - [x] **Backend:** Add `@SpringBootTest` + MockMvc integration test for the endpoint.

@@ -1,6 +1,6 @@
-package com.yourorg.stackspike.greeting.internal;
+package com.yourorg.quickapp.greeting.internal;
 
-import com.yourorg.stackspike.greeting.GreetingApi;
+import com.yourorg.quickapp.greeting.GreetingApi;
 import org.springframework.stereotype.Service;
 
 @Service

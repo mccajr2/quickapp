@@ -1,12 +1,12 @@
 # Architecture
 
-Long-lived design decisions for stack-spike. Feature-specific detail lives in
+Long-lived design decisions for quickapp. Feature-specific detail lives in
 `docs/specs/`; this document explains *how the repo is organized* and *how work
 flows through it*.
 
 ## What this repo is
 
-stack-spike is an **SDD (spec-driven development) infrastructure repo**, not a
+quickapp is an **SDD (spec-driven development) infrastructure repo**, not a
 shipped product. The `greeting` backend module and mobile demo UI are disposable
 harnesses used to prove the toolchain. Real apps reuse the same patterns:
 spec → contract → backend module → mobile client → native UI.
@@ -24,7 +24,7 @@ See `docs/specs/archive/kmp-networking-spike.md` for checkpoint 3 evidence.
 ## Repository layout
 
 ```
-stack-spike/
+quickapp/
 ├── backend/              # Spring Boot app + Modulith modules (root Gradle build)
 │   └── modules/*         # One folder = one vertical slice (auto-discovered)
 ├── mobile/               # Separate Gradle build (KMP)

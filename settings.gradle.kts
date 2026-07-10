@@ -2,7 +2,7 @@ pluginManagement {
     includeBuild("build-logic")
 }
 
-rootProject.name = "stack-spike"
+rootProject.name = "quickapp"
 
 dependencyResolutionManagement {
     repositories {

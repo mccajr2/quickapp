@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.painterResource
 
-import kmp_spike.sharedui.generated.resources.Res
-import kmp_spike.sharedui.generated.resources.compose_multiplatform
+import quickapp.sharedui.generated.resources.Res
+import quickapp.sharedui.generated.resources.compose_multiplatform
 
 @Composable
 @Preview
