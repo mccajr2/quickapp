@@ -206,12 +206,42 @@ reverted. Never weaken a test to make it pass.
   `git rm -r --cached <path>/build`.
 - **Do not commit** Gradle problem reports or local IDE config.
 
+## CI
+
+Path-filtered GitHub Actions run on pull requests and pushes to `main`:
+
+| Workflow | Paths | Job |
+|----------|-------|-----|
+| `.github/workflows/backend.yml` | `backend/**`, `build-logic/**`, `gradle/**`, root Gradle files, the workflow itself | `:backend:test` (JDK 25) on `ubuntu-latest` |
+| `.github/workflows/mobile.yml` | `mobile/**`, the workflow itself | `:sharedLogic:testAndroidHostTest` + `:androidApp:assembleDebug` (JDK 21 + Android SDK) on `ubuntu-latest` |
+
+Docs-only or unrelated-path changes do not start the irrelevant workflow.
+
+### Operator setup (manual)
+
+1. Push `main` to `origin` once the workflows are on the remote.
+2. In GitHub → Settings → Branches, protect `main` with **classic** branch
+   protection (rulesets on private personal repos may not enforce without a Team
+   org):
+   - Require a pull request before merging
+   - Do not allow force pushes
+   - Do not allow deletions
+   - After each workflow has run at least once: optionally require status checks
+     `backend` / `mobile` (job names in the YAML)
+3. Land subsequent work via PRs; CI runs on the PR and again on push to `main`
+   after merge.
+
+### CI follow-ups (not in this pass)
+
+- iOS CI (`macos-latest` / simulator tests)
+- Web CI (when `web/` exists)
+- Contract validation (Spectral + spec/implementation diff) — see below
+
 ## Not built yet
 
 These are intentional gaps; add via spec when ready:
 
 - `web/` client scaffold
-- GitHub Actions CI (path-filtered per module)
 - OpenAPI code generation for clients
 - Contract validation in CI (Spectral + spec/implementation diff)
 - Postgres persistence, auth, production error handling

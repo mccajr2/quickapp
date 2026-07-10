@@ -70,7 +70,7 @@ No OpenAPI changes.
 - [x] **CI:** Add `.github/workflows/backend.yml` (path filters, JDK 25, `:backend:test`).
 - [x] **CI:** Add `.github/workflows/mobile.yml` (path filters, JDK + Android SDK,
       sharedLogic Android host tests + `assembleDebug`).
-- [ ] **Docs:** Update `docs/architecture.md` — CI present; remaining gaps; operator
+- [x] **Docs:** Update `docs/architecture.md` — CI present; remaining gaps; operator
       setup for remote + branch protection.
 - [ ] **Verify:** Confirm workflow YAML is valid (actionlint if available, or dry-read
       against GitHub Actions schema / local sanity). Note that a live green run on
