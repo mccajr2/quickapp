@@ -8,6 +8,9 @@ Added: [YYYY-MM-DD · initial | enhancement]
 Thin stub from `/roadmap`. **Not implementable yet.** Run `/spec [feature-name]`
 to flesh out Approach, Acceptance Criteria, and Tasks before any code.
 
+If fleshing out reveals more than one PR-sized slice, stop and `/roadmap` **split**
+(`Added: … · re-rank split`) — do not grow this stub into a mega-spec.
+
 ## Problem
 
 [1–3 sentences sketch.]

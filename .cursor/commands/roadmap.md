@@ -22,6 +22,28 @@ task list, one vertical cut):
 If the ask is large, multi-capability, or sequencing is unclear → full roadmap
 flow below.
 
+## Split if too big (stub or planned item grew)
+
+A stub may stay vague; a slice that needs full AC/tasks must stay **one PR**.
+
+If while carving up, editing a `planned/` stub, or reviewing Upcoming you see an
+item that is clearly multiple shippable capabilities:
+
+1. Stop — do not fatten one id into a mega-spec.
+2. **Split** into 2+ kebab-case ids (vertical slices).
+3. Set each new/kept row’s **Added** to `YYYY-MM-DD · re-rank split` (or keep
+   `initial`/`enhancement` on the surviving first slice if it was already
+   provenance-tagged — new siblings use `re-rank split`).
+4. Re-rank **Upcoming**; rank **1** = the first slice to `/spec` next.
+5. Replace or trim the oversized stub; add thin stubs for the new ids under
+   `docs/specs/planned/` as needed.
+6. History line if the split is notable.
+7. Stop and report the new Next up.
+
+If the oversized item is already **`active`**, use Conflict rules (finish /
+amend down / abandon) — do not split an in-progress spec from `/roadmap`
+without the user picking a path.
+
 ## Modes
 
 ### A. Initial carve-up / add ideas

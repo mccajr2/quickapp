@@ -25,8 +25,17 @@ Steps:
 6. Fill in Problem, Non-goals, Approach, Acceptance Criteria, and a Tasks checklist
    broken down by layer (backend/contract/web/iOS/tests) — omit layers this feature
    doesn't touch.
-7. Update `docs/roadmap.md`: set this id’s status to `active`; add/update the
+7. **Split if too big (while fleshing out).** If full AC/tasks reveal multiple
+   independent shippable capabilities (or the task list no longer fits one PR):
+   - Stop — do not publish a mega-spec for approval.
+   - Hand off to `/roadmap`: split into 2+ ids with **Added** `re-rank split`,
+     re-rank, leave thin `planned/` stubs for the remainder.
+   - Keep only the first slice on this branch as `active/<id>.md` (rename id if
+     needed to match the surviving roadmap row); demote the rest to `planned`.
+   - Update `docs/roadmap.md` Active/Upcoming accordingly, then show the narrowed
+     spec for approval (or wait for the user to confirm the split first).
+8. Update `docs/roadmap.md`: set this id’s status to `active`; add/update the
    **Active specs** row (branch + link). Do not re-rank other items unless the
-   user also asked for a re-rank via `/roadmap`.
-8. Do NOT start implementing. Stop after the spec is written and show it to me for
+   user also asked for a re-rank via `/roadmap` (or step 7 required a split).
+9. Do NOT start implementing. Stop after the spec is written and show it to me for
    approval before any code changes.

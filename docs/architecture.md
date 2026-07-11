@@ -75,7 +75,8 @@ use `/spec`.
 - **Active specs are locked** for re-rank; conflicting roadmap changes must
   finish, amend, or abandon the active spec first — never silently.
 - Optional thin stubs: `docs/specs/planned/<id>.md` (sketch only). `/spec`
-  promotes and fleshes them out.
+  promotes and fleshes them out. If a stub or draft spec grows past one PR,
+  **split via `/roadmap`** (`re-rank split`) — never fatten into a mega-spec.
 
 If an idea is clearly one PR-sized slice, `/roadmap` redirects to `/spec`
 instead of inventing a fake multi-item plan.

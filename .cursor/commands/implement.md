@@ -21,6 +21,8 @@ Steps:
    unattended.
 8. If a task turns out to be bigger or more ambiguous than the spec implies, stop
    and flag it rather than improvising scope — this usually means the spec needs
-   a quick edit, not a bigger diff.
+   a quick edit, not a bigger diff. If the **whole spec** is too big for one PR,
+   stop implementing: narrow via amend, or abandon and `/roadmap` split
+   (`re-rank split`) — do not silently expand the active spec.
 9. When all tasks and acceptance criteria are done, remind me to run `/pr` (do not
    merge to `main` directly).
