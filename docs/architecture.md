@@ -47,28 +47,37 @@ connects them.
 
 ## SDD workflow
 
+`main` is protected: work lands only via pull request. **One active spec → one
+feature branch → one PR.**
+
 ```
-/spec  →  /implement (one task at a time)  →  commit at layer boundaries  →  archive spec
+/spec (on a feature branch)  →  /implement (one task at a time)
+  →  commit at layer boundaries  →  /pr (archive spec + open PR)  →  merge
 ```
 
-1. **Spec** — Copy `docs/specs/_template.md` to `docs/specs/active/<feature>.md`.
-   Write problem, non-goals, acceptance criteria, and tasks by layer. Do not
-   implement until the spec is approved.
+1. **Branch + Spec** — From up-to-date `main`, create a branch named after the
+   feature (kebab-case, e.g. `path-filtered-ci`). Copy
+   `docs/specs/_template.md` to `docs/specs/active/<feature>.md`. Write problem,
+   non-goals, acceptance criteria, and tasks by layer. Do not implement until
+   the spec is approved. Tiny non-spec fixes still use a short-lived branch + PR;
+   they just skip the spec file.
 
 2. **Checkpoint commit** — Before any multi-file change:
    `git commit -m "checkpoint: before <feature-name>"`.
 
-3. **Implement** — One unchecked task at a time (`/implement`). Each task includes
-   its test; run the relevant suite before checking the box.
+3. **Implement** — One unchecked task at a time (`/implement`) on the feature
+   branch — not on `main`. Each task includes its test; run the relevant suite
+   before checking the box.
 
 4. **Commit at layer boundaries** — Natural split points:
    - backend + contract
    - mobile `sharedLogic`
    - platform UI wiring (Android / iOS)
-   - spec archive
+   - spec archive (usually via `/pr`)
 
 5. **Close out** — Manual smoke where needed, check off acceptance criteria,
-   move spec to `docs/specs/archive/`.
+   then `/pr`: archive the spec to `docs/specs/archive/`, push the branch, and
+   open the PR. Merge when CI is green.
 
 Cursor rules in `.cursor/rules/` enforce per-layer conventions; `AGENTS.md` is the
 constitution (changes rarely).
@@ -219,17 +228,12 @@ Docs-only or unrelated-path changes do not start the irrelevant workflow.
 
 ### Operator setup (manual)
 
-1. Push `main` to `origin` once the workflows are on the remote.
-2. In GitHub → Settings → Branches, protect `main` with **classic** branch
-   protection (rulesets on private personal repos may not enforce without a Team
-   org):
-   - Require a pull request before merging
-   - Do not allow force pushes
-   - Do not allow deletions
-   - After each workflow has run at least once: optionally require status checks
-     `backend` / `mobile` (job names in the YAML)
-3. Land subsequent work via PRs; CI runs on the PR and again on push to `main`
-   after merge.
+Branch protection on `main` is in effect (classic rules: require a pull request,
+no force pushes, no deletions). Optionally require status checks `backend` /
+`mobile` once those jobs have run at least once.
+
+Land all work via feature branches and PRs. CI runs on the PR and again on push
+to `main` after merge. See **SDD workflow** above for the branch-per-spec rule.
 
 ### CI follow-ups (not in this pass)
 
@@ -263,14 +267,15 @@ alignment for the single endpoint. First CI step when ready: Spectral on
 
 Use this after the harness is no longer sufficient:
 
-1. `/spec <feature-name>` — scope, non-goals, acceptance criteria, tasks by layer.
+1. `/spec <feature-name>` — creates/uses a feature branch, then scope, non-goals,
+   acceptance criteria, tasks by layer.
 2. If the API changes: update `contracts/openapi.yaml` first (or in the same PR as
    backend + all consumers).
 3. Backend: new module or extend existing slice; controller public, logic `internal`.
 4. Mobile: new or extended client in `sharedLogic`; wire UI on each platform.
 5. Web: required before merge if contract changed (once `web/` exists).
 6. Tests at each layer; manual smoke if UI/network involved.
-7. Archive spec to `docs/specs/archive/` when acceptance criteria are met.
+7. `/pr` — archive spec to `docs/specs/archive/`, open the PR, merge when CI is green.
 
 ## Conventions (accumulate here)
 

@@ -60,6 +60,7 @@ cd mobile
 
 ## Status
 
-Verified checkpoints: Modulith backend, KMP sharedLogic on both platforms, and
-end-to-end networking (OpenAPI → REST → Ktor → native UI). Next infrastructure:
-path-filtered CI, then web client.
+Verified checkpoints: Modulith backend, KMP sharedLogic on both platforms,
+end-to-end networking (OpenAPI → REST → Ktor → native UI), and path-filtered CI.
+`main` is PR-protected (one feature branch per active spec). Next infrastructure:
+web client.

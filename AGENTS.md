@@ -76,7 +76,8 @@ proof of the toolchain, not the product.
 
 ## How specs work here
 
-- `docs/specs/active/<feature>.md` via `/spec`, followed via `/implement`.
+- `main` is PR-protected. One active spec → one feature branch → one PR (`/pr`).
+- `docs/specs/active/<feature>.md` via `/spec` (on that branch), then `/implement`.
 - `docs/specs/archive/` — completed specs, kept as history.
 - `docs/architecture.md` — longer-lived design decisions.
 
