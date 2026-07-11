@@ -6,10 +6,10 @@ decision changes, not per-feature.
 ## What this is
 
 **quickapp** is a reusable, spec-driven starter for full-stack products: a Spring
-Modulith backend, Kotlin Multiplatform mobile (Android + iOS), an OpenAPI contract,
-and (soon) a web client. Clone it to spin up a new app; extend it with vertical
-modules and `/spec` → `/implement` workflows. The `greeting` harness is disposable
-proof of the toolchain, not the product.
+Modulith backend, Kotlin Multiplatform mobile (Android + iOS), a React web
+client, and an OpenAPI contract. Clone it to spin up a new app; extend it with
+vertical modules and `/spec` → `/implement` workflows. The `greeting` harness is
+disposable proof of the toolchain, not the product.
 
 ## Stack
 
@@ -25,8 +25,10 @@ proof of the toolchain, not the product.
   using it or go fully native-UI per platform as real screens get built.
 - Mobile and backend are two independent Gradle builds in one git repo, not one
   unified build. They share no Gradle code — only the OpenAPI contract connects them.
-- Web: [React/Vue] + reactive state, AI-driven, lower rigor than backend/mobile —
-  entirely separate toolchain, not part of either Gradle build.
+- Web: Vite + React + TypeScript + Tailwind (shadcn-style UI), AI-driven, lower
+  rigor than backend/mobile — entirely separate toolchain (`web/`, npm), not part
+  of either Gradle build. Hand-written clients in `web/src/api/` stay aligned with
+  `contracts/openapi.yaml`.
 - Contract: OpenAPI spec in `contracts/openapi.yaml` — source of truth for the API.
 - CI/CD: GitHub Actions, path-filtered per module (see `.github/workflows/`).
 - Hosting: Render (backend), Neon (Postgres), UptimeRobot (keep-alive).

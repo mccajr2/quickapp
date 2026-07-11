@@ -6,15 +6,27 @@ alwaysApply: false
 
 # Web (reactive frontend)
 
-- API calls go through the generated/hand-written client in `web/src/api/`, which
-  is generated from or hand-kept in sync with `contracts/openapi.yaml`. Never hand-roll
-  a fetch call to a backend endpoint outside that client.
-- [FILL IN: your state management pattern — e.g. "server state via React Query,
-  local UI state via useState/signals, no global store for server data."]
-- [FILL IN: component structure convention — e.g. "one component per file, colocated
-  test file, colocated styles."]
+- Stack: Vite + React + TypeScript + Tailwind; shadcn-style primitives under
+  `web/src/components/ui/`.
+- **Toolchain:** Node and npm are pinned (`web/.nvmrc`, `package.json`
+  `engines` + `packageManager`). Use that Node locally (nvm/fnm/asdf). Enable
+  Corepack (`corepack enable`) so `npm` matches `packageManager`. Never commit a
+  lockfile produced on a different Node/npm. CI reads `.nvmrc`, enables Corepack,
+  and only runs `npm ci` (never `npm install`).
+- API calls go through the hand-written client in `web/src/api/`, kept in sync
+  with `contracts/openapi.yaml`. Never hand-roll a `fetch` to a backend endpoint
+  outside that client. In `npm run dev`, `/api` is proxied to the backend (see
+  `vite.config.ts`); override with `VITE_API_BASE_URL` when needed.
+- Server/async UI state: local React state (`useState`) in the fetching component
+  for now — no global store and no React Query until a second remote screen needs
+  shared cache. Inject the API client via props when testing.
+- Components: one component per file under `web/src/components/`; colocated
+  `*.test.tsx` next to the component; shared UI primitives in
+  `web/src/components/ui/`.
 - New component with any logic (not pure presentational) → component test with
-  Testing Library. New user-facing flow → Playwright e2e test.
+  Testing Library (Vitest). New user-facing product flow → Playwright e2e
+  (deferred for the greeting harness; add when a real flow lands).
 - Loading/error/empty states are required for every data-fetching component, not
   an afterthought — write them in the same pass as the happy path.
-- Run lint + unit tests before calling frontend work done.
+- Run `npm run lint` + `npm test` (and `npm run build` before PR) from `web/`
+  before calling frontend work done.
