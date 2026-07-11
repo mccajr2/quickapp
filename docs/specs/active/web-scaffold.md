@@ -74,7 +74,7 @@ No OpenAPI changes.
 - [x] **Tests:** Vitest + Testing Library for harness/client behavior.
 - [x] **CI:** Add `.github/workflows/web.yml` (path filters, Node LTS, lint +
       test + build).
-- [ ] **Docs:** Update `AGENTS.md`, `docs/architecture.md`, `README.md`, and
+- [x] **Docs:** Update `AGENTS.md`, `docs/architecture.md`, `README.md`, and
       `.cursor/rules/web.mdc` for React web + CI; note design-token sync as a
       follow-up for cross-client look consistency.
 - [ ] **Verify:** Local `lint`/`test`/`build` green; actionlint or structural

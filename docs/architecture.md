@@ -9,7 +9,7 @@ flows through it*.
 quickapp is an **SDD (spec-driven development) infrastructure repo**, not a
 shipped product. The `greeting` backend module and mobile demo UI are disposable
 harnesses used to prove the toolchain. Real apps reuse the same patterns:
-spec → contract → backend module → mobile client → native UI.
+spec → contract → backend module → mobile/web clients → native or browser UI.
 
 Three checkpoints are verified in git:
 
@@ -19,7 +19,9 @@ Three checkpoints are verified in git:
 | 2 | KMP `sharedLogic` callable from native Android and iOS |
 | 3 | Full cross-stack path: OpenAPI → REST endpoint → Ktor client → native UI |
 
-See `docs/specs/archive/kmp-networking-spike.md` for checkpoint 3 evidence.
+Web (`web/`) is a fourth consumer of the same OpenAPI contract (React harness +
+path-filtered CI). See `docs/specs/archive/kmp-networking-spike.md` for
+checkpoint 3 evidence.
 
 ## Repository layout
 
@@ -38,12 +40,13 @@ quickapp/
 ├── docs/
 │   ├── architecture.md   # ← this file
 │   └── specs/            # active/ + archive/
-└── web/                  # Not yet created
+└── web/                  # Vite + React + TypeScript (npm; separate from Gradle)
 ```
 
-**Two independent Gradle builds**, one git repo. Backend root is the repo root;
-mobile is under `mobile/`. They share no Gradle code — only `contracts/openapi.yaml`
-connects them.
+**Two independent Gradle builds** plus a separate **npm** web app, one git repo.
+Backend root is the repo root; mobile is under `mobile/`; web is under `web/`.
+Gradle builds share no Gradle code with each other or with web — only
+`contracts/openapi.yaml` connects them.
 
 ## SDD workflow
 
@@ -89,12 +92,16 @@ flowchart LR
     subgraph clients [Clients]
         Android[androidApp / sharedUI]
         iOS[iosApp / SwiftUI]
-        Web[web - future]
+        Web[web / React]
     end
 
     subgraph mobile [mobile/sharedLogic]
         Client[GreetingClient / future clients]
         ApiConfig[apiBaseUrl expect/actual]
+    end
+
+    subgraph webApp [web/src/api]
+        WebClient[GreetingClient]
     end
 
     subgraph contract [Contract]
@@ -108,11 +115,13 @@ flowchart LR
 
     Android --> Client
     iOS --> Client
-    Web -.-> OpenAPI
+    Web --> WebClient
     Client --> ApiConfig
     Client -->|HTTP GET| Controller
+    WebClient -->|HTTP GET| Controller
     OpenAPI --> Controller
     OpenAPI -.-> Client
+    OpenAPI -.-> WebClient
     Controller --> Service
 ```
 
@@ -187,12 +196,11 @@ Run tests: `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :sharedLogic
 ## Contract-first API
 
 - **Source of truth:** `contracts/openapi.yaml`
-- **Current consumers:** mobile only (`web/` does not exist yet)
+- **Current consumers:** mobile (`sharedLogic` Ktor) and web (`web/src/api/`)
 - **AGENTS.md rule:** never modify the contract without updating **both** web and
-  mobile clients in the same change. Exception: spikes/features before `web/`
-  exists must note the deferral in the spec non-goals.
-- **Client implementation today:** hand-written Ktor clients in `sharedLogic`
-  (OpenAPI codegen is a follow-up).
+  mobile clients in the same change.
+- **Client implementation today:** hand-written Ktor clients in `sharedLogic` and
+  hand-written `fetch` clients in `web/src/api/` (OpenAPI codegen is a follow-up).
 
 ## Testing strategy
 
@@ -204,6 +212,7 @@ Run tests: `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :sharedLogic
 | sharedLogic client | Ktor `MockEngine` in `commonTest` | — |
 | Platform config | `androidHostTest` / `iosTest` | — |
 | Native UI | Compile (`assembleDebug`, `xcodebuild`) | Emulator/simulator smoke |
+| Web client / harness | Vitest + Testing Library | `npm run dev` against `bootRun` |
 
 Never call work "done" without a passing test that would fail if the change were
 reverted. Never weaken a test to make it pass.
@@ -223,6 +232,7 @@ Path-filtered GitHub Actions run on pull requests and pushes to `main`:
 |----------|-------|-----|
 | `.github/workflows/backend.yml` | `backend/**`, `build-logic/**`, `gradle/**`, root Gradle files, the workflow itself | `:backend:test` (JDK 25) on `ubuntu-latest` |
 | `.github/workflows/mobile.yml` | `mobile/**`, the workflow itself | `:sharedLogic:testAndroidHostTest` + `:androidApp:assembleDebug` (JDK 21 + Android SDK) on `ubuntu-latest` |
+| `.github/workflows/web.yml` | `web/**`, the workflow itself | `npm ci` + lint + test + build (Node LTS) on `ubuntu-latest` |
 
 Docs-only or unrelated-path changes do not start the irrelevant workflow.
 
@@ -230,24 +240,24 @@ Docs-only or unrelated-path changes do not start the irrelevant workflow.
 
 Branch protection on `main` is in effect (classic rules: require a pull request,
 no force pushes, no deletions). Optionally require status checks `backend` /
-`mobile` once those jobs have run at least once.
+`mobile` / `web` once those jobs have run at least once.
 
 Land all work via feature branches and PRs. CI runs on the PR and again on push
 to `main` after merge. See **SDD workflow** above for the branch-per-spec rule.
 
-### CI follow-ups (not in this pass)
+### CI follow-ups
 
 - iOS CI (`macos-latest` / simulator tests)
-- Web CI (when `web/` exists)
 - Contract validation (Spectral + spec/implementation diff) — see below
+- Playwright e2e for real web product flows (harness uses Vitest only)
 
 ## Not built yet
 
 These are intentional gaps; add via spec when ready:
 
-- `web/` client scaffold
 - OpenAPI code generation for clients
 - Contract validation in CI (Spectral + spec/implementation diff)
+- Shared design tokens across web / Compose / SwiftUI (look-and-feel consistency)
 - Postgres persistence, auth, production error handling
 - Normalized network error messages in `sharedLogic` (iOS Darwin errors are verbose)
 
@@ -255,13 +265,13 @@ These are intentional gaps; add via spec when ready:
 
 Add when **any** of these becomes true:
 
-1. `web/` exists and consumes the same OpenAPI spec
-2. OpenAPI codegen is adopted for mobile or web
-3. A second endpoint/module makes manual alignment error-prone
+1. OpenAPI codegen is adopted for mobile or web
+2. A second endpoint/module makes manual alignment error-prone
+3. You want style/validity lint on `contracts/openapi.yaml` in every PR
 
-Until then, `GreetingControllerIntegrationTest` + `GreetingClientTest` enforce
-alignment for the single endpoint. First CI step when ready: Spectral on
-`contracts/openapi.yaml` for validity/style.
+Until then, `GreetingControllerIntegrationTest`, mobile `GreetingClientTest`, and
+web `GreetingClient` / harness tests enforce alignment for the single endpoint.
+First CI step when ready: Spectral on `contracts/openapi.yaml` for validity/style.
 
 ## Adding a real feature (checklist)
 
