@@ -1,6 +1,6 @@
 # Spec: web-scaffold
 
-Status: draft
+Status: in-progress
 Created: 2026-07-10
 
 ## Problem
@@ -67,7 +67,7 @@ No OpenAPI changes.
 
 ## Tasks
 
-- [ ] **Web:** Scaffold Vite + React + TS in `web/` (package manager lockfile
+- [x] **Web:** Scaffold Vite + React + TS in `web/` (package manager lockfile
       committed); Tailwind + shadcn-style setup; env/base URL for API.
 - [ ] **Web:** Hand-written greeting client in `web/src/api/` + harness page with
       loading/error/success.
