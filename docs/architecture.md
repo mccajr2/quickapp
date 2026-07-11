@@ -302,15 +302,16 @@ First CI step when ready: Spectral on `contracts/openapi.yaml` for validity/styl
 
 Use this after the harness is no longer sufficient:
 
-1. `/spec <feature-name>` — creates/uses a feature branch, then scope, non-goals,
-   acceptance criteria, tasks by layer.
+1. `/roadmap` if the idea is multi-slice; else `/spec <feature-name>` — feature
+   branch, scope, non-goals, acceptance criteria, tasks by layer.
 2. If the API changes: update `contracts/openapi.yaml` first (or in the same PR as
    backend + all consumers).
 3. Backend: new module or extend existing slice; controller public, logic `internal`.
 4. Mobile: new or extended client in `sharedLogic`; wire UI on each platform.
 5. Web: required before merge if contract changed (once `web/` exists).
 6. Tests at each layer; manual smoke if UI/network involved.
-7. `/pr` — archive spec to `docs/specs/archive/`, open the PR, merge when CI is green.
+7. `/pr` — archive spec, update `docs/roadmap.md` Done/Active, open the PR, merge
+   when CI is green.
 
 ## Conventions (accumulate here)
 
