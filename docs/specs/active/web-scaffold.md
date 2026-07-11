@@ -69,7 +69,7 @@ No OpenAPI changes.
 
 - [x] **Web:** Scaffold Vite + React + TS in `web/` (package manager lockfile
       committed); Tailwind + shadcn-style setup; env/base URL for API.
-- [ ] **Web:** Hand-written greeting client in `web/src/api/` + harness page with
+- [x] **Web:** Hand-written greeting client in `web/src/api/` + harness page with
       loading/error/success.
 - [ ] **Tests:** Vitest + Testing Library for harness/client behavior.
 - [ ] **CI:** Add `.github/workflows/web.yml` (path filters, Node LTS, lint +
