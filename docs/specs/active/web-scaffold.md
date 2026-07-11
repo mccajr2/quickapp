@@ -71,7 +71,7 @@ No OpenAPI changes.
       committed); Tailwind + shadcn-style setup; env/base URL for API.
 - [x] **Web:** Hand-written greeting client in `web/src/api/` + harness page with
       loading/error/success.
-- [ ] **Tests:** Vitest + Testing Library for harness/client behavior.
+- [x] **Tests:** Vitest + Testing Library for harness/client behavior.
 - [ ] **CI:** Add `.github/workflows/web.yml` (path filters, Node LTS, lint +
       test + build).
 - [ ] **Docs:** Update `AGENTS.md`, `docs/architecture.md`, `README.md`, and
