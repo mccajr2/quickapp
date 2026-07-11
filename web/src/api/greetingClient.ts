@@ -14,9 +14,7 @@ export class GreetingClient {
   }
 
   async fetchGreeting(name: string): Promise<string> {
-    const url = new URL("/api/greeting", ensureTrailingSlash(this.baseUrl))
-    url.searchParams.set("name", name)
-
+    const url = greetingUrl(this.baseUrl, name)
     const response = await this.fetchFn(url)
     if (!response.ok) {
       throw new Error(`Greeting request failed (${response.status})`)
@@ -30,6 +28,13 @@ export class GreetingClient {
   }
 }
 
-function ensureTrailingSlash(baseUrl: string): string {
-  return baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`
+export function greetingUrl(baseUrl: string, name: string): string {
+  if (!baseUrl) {
+    const url = new URL("/api/greeting", "http://localhost")
+    url.searchParams.set("name", name)
+    return `${url.pathname}${url.search}`
+  }
+  const url = new URL("/api/greeting", `${baseUrl}/`)
+  url.searchParams.set("name", name)
+  return url.toString()
 }

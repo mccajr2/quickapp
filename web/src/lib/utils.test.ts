@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { apiBaseUrl } from "@/config"
+import { greetingUrl } from "@/api/greetingClient"
 import { cn } from "@/lib/utils"
 
 describe("web scaffold", () => {
@@ -8,7 +8,13 @@ describe("web scaffold", () => {
     expect(cn("px-2", "px-4")).toBe("px-4")
   })
 
-  it("defaults apiBaseUrl to local backend", () => {
-    expect(apiBaseUrl).toBe("http://localhost:8080")
+  it("builds absolute greeting URLs from a base", () => {
+    expect(greetingUrl("http://localhost:8080", "Web")).toBe(
+      "http://localhost:8080/api/greeting?name=Web",
+    )
+  })
+
+  it("builds same-origin greeting paths when base is empty", () => {
+    expect(greetingUrl("", "Web")).toBe("/api/greeting?name=Web")
   })
 })
