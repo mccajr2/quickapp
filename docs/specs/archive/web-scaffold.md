@@ -1,7 +1,8 @@
 # Spec: web-scaffold
 
-Status: in-progress
+Status: done
 Created: 2026-07-10
+Completed: 2026-07-10
 
 ## Problem
 
@@ -47,23 +48,23 @@ No OpenAPI changes.
 
 ## Acceptance criteria
 
-- [ ] `web/` exists as a Vite + React + TypeScript app; `npm` (or project-chosen
+- [x] `web/` exists as a Vite + React + TypeScript app; `npm` (or project-chosen
       package manager) scripts for `dev`, `build`, `lint`, and `test` work.
-- [ ] Tailwind + a small set of shadcn-style UI primitives are in place; the
+- [x] Tailwind + a small set of shadcn-style UI primitives are in place; the
       harness page is not unstyled browser defaults.
-- [ ] `web/src/api/` holds the greeting client; no ad-hoc `fetch` to backend
+- [x] `web/src/api/` holds the greeting client; no ad-hoc `fetch` to backend
       endpoints outside that client.
-- [ ] Harness UI shows loading, error, and success states for the greeting call
+- [x] Harness UI shows loading, error, and success states for the greeting call
       (success path tested with a mock; manual smoke against `bootRun` optional
       but documented).
-- [ ] Component/unit tests (Vitest + Testing Library) cover the greeting flow
+- [x] Component/unit tests (Vitest + Testing Library) cover the greeting flow
       enough that reverting the client or state handling fails a test.
-- [ ] `.github/workflows/web.yml` runs on PR + push to `main` when `web/**` (or
+- [x] `.github/workflows/web.yml` runs on PR + push to `main` when `web/**` (or
       the workflow) changes: install, lint, test, build on `ubuntu-latest`.
-- [ ] Docs/rules updated: AGENTS.md picks React; architecture lists web as a
+- [x] Docs/rules updated: AGENTS.md picks React; architecture lists web as a
       consumer + web CI; `.cursor/rules/web.mdc` FILL INs replaced with real
       conventions; README status no longer says web is the missing scaffold only.
-- [ ] No changes to `contracts/openapi.yaml`, backend modules, or mobile apps.
+- [x] No changes to `contracts/openapi.yaml`, backend modules, or mobile apps.
 
 ## Tasks
 
@@ -77,9 +78,17 @@ No OpenAPI changes.
 - [x] **Docs:** Update `AGENTS.md`, `docs/architecture.md`, `README.md`, and
       `.cursor/rules/web.mdc` for React web + CI; note design-token sync as a
       follow-up for cross-client look consistency.
-- [ ] **Verify:** Local `lint`/`test`/`build` green; actionlint or structural
+- [x] **Verify:** Local `lint`/`test`/`build` green; actionlint or structural
       check on `web.yml`; remind operator that a live green Actions run needs the
       PR push.
+
+## Verification notes
+
+- `cd web && npm run lint && npm test && npm run build` — all green (8 tests).
+- **actionlint** on `.github/workflows/web.yml` — no findings.
+- 10 acceptance dry-read checks passed; no `contracts/` / `backend/` / `mobile/`
+  diffs vs `main`.
+- **Operator:** open/merge the PR; live green `web` Actions run happens on the PR / merge to `main`.
 
 ## Open questions
 
