@@ -9,7 +9,7 @@ with a proven toolchain — not a one-off spike.
 | Mobile | Kotlin Multiplatform — shared logic, Android (Compose) + iOS (SwiftUI) |
 | Web | Vite + React + TypeScript + Tailwind (shadcn-style UI) |
 | Contract | OpenAPI (`contracts/openapi.yaml`) |
-| Workflow | `/spec` → `/implement` → `/pr` → merge |
+| Workflow | `/roadmap` → `/spec` → `/implement` → `/pr` → merge |
 
 The `greeting` module and demo UI are **disposable harnesses** that prove the
 cross-stack path works. Real features get their own Modulith modules and specs.
@@ -45,8 +45,9 @@ real HTTP round-trip).
 | Doc | Purpose |
 |-----|---------|
 | [AGENTS.md](AGENTS.md) | Constitution for humans and coding agents |
+| [docs/roadmap.md](docs/roadmap.md) | Product backlog — carve-up, re-rank, Next up |
 | [docs/architecture.md](docs/architecture.md) | SDD workflow, module patterns, how to add features |
-| [docs/specs/](docs/specs/) | Active and archived feature specs |
+| [docs/specs/](docs/specs/) | Planned stubs, active, and archived feature specs |
 | [contracts/openapi.yaml](contracts/openapi.yaml) | API source of truth |
 
 ## Tests
@@ -68,7 +69,7 @@ npm test
 
 1. Clone / copy **quickapp** as your new app repo.
 2. Read `docs/architecture.md` (“Adding a real feature”).
-3. `/spec <feature-name>` for the first real capability.
+3. `/roadmap` for a large product idea (or `/spec <feature-name>` for one slice).
 4. Keep `greeting` until you no longer need the harness, then delete it.
 
 ## Status

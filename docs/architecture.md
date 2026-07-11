@@ -53,17 +53,43 @@ Gradle builds share no Gradle code with each other or with web — only
 `main` is protected: work lands only via pull request. **One active spec → one
 feature branch → one PR.**
 
+Large product ideas go through the **roadmap** first; implementable slices still
+use `/spec`.
+
 ```
-/spec (on a feature branch)  →  /implement (one task at a time)
+/roadmap (optional carve-up / re-rank)
+  →  /spec (on a feature branch)  →  /implement (one task at a time)
   →  commit at layer boundaries  →  /pr (archive spec + open PR)  →  merge
 ```
 
+### Roadmap (product backlog)
+
+- **One file:** `docs/roadmap.md` — living product backlog for this repo.
+- **1:1 mapping:** each kebab-case backlog **id** ↔ one spec
+  (`docs/specs/planned|active|archive/<id>.md`) when that spec exists.
+- **`/roadmap`** — carve up big ideas, add enhancements, **re-rank** upcoming
+  items, resolve conflicts with in-progress work. Rank **1** = Next up.
+- **Item status:** `parking` → `planned` → `active` → `done` (or `cancelled`).
+- **Provenance:** each row’s **Added** field (`initial` / `enhancement` /
+  `re-rank split`) distinguishes original carve-up from later ideas.
+- **Active specs are locked** for re-rank; conflicting roadmap changes must
+  finish, amend, or abandon the active spec first — never silently.
+- Optional thin stubs: `docs/specs/planned/<id>.md` (sketch only). `/spec`
+  promotes and fleshes them out. If a stub or draft spec grows past one PR,
+  **split via `/roadmap`** (`re-rank split`) — never fatten into a mega-spec.
+
+If an idea is clearly one PR-sized slice, `/roadmap` redirects to `/spec`
+instead of inventing a fake multi-item plan.
+
+### Spec → implement → PR
+
 1. **Branch + Spec** — From up-to-date `main`, create a branch named after the
-   feature (kebab-case, e.g. `path-filtered-ci`). Copy
-   `docs/specs/_template.md` to `docs/specs/active/<feature>.md`. Write problem,
-   non-goals, acceptance criteria, and tasks by layer. Do not implement until
-   the spec is approved. Tiny non-spec fixes still use a short-lived branch + PR;
-   they just skip the spec file.
+   feature (kebab-case, e.g. `path-filtered-ci`). Prefer Next up from the
+   roadmap when no name is given. Copy or promote into
+   `docs/specs/active/<feature>.md`. Write problem, non-goals, acceptance
+   criteria, and tasks by layer. Do not implement until the spec is approved.
+   Tiny non-spec fixes still use a short-lived branch + PR; they just skip the
+   spec file.
 
 2. **Checkpoint commit** — Before any multi-file change:
    `git commit -m "checkpoint: before <feature-name>"`.
@@ -79,8 +105,8 @@ feature branch → one PR.**
    - spec archive (usually via `/pr`)
 
 5. **Close out** — Manual smoke where needed, check off acceptance criteria,
-   then `/pr`: archive the spec to `docs/specs/archive/`, push the branch, and
-   open the PR. Merge when CI is green.
+   then `/pr`: archive the spec to `docs/specs/archive/`, update roadmap Done /
+   clear Active, push the branch, and open the PR. Merge when CI is green.
 
 Cursor rules in `.cursor/rules/` enforce per-layer conventions; `AGENTS.md` is the
 constitution (changes rarely).
@@ -277,15 +303,16 @@ First CI step when ready: Spectral on `contracts/openapi.yaml` for validity/styl
 
 Use this after the harness is no longer sufficient:
 
-1. `/spec <feature-name>` — creates/uses a feature branch, then scope, non-goals,
-   acceptance criteria, tasks by layer.
+1. `/roadmap` if the idea is multi-slice; else `/spec <feature-name>` — feature
+   branch, scope, non-goals, acceptance criteria, tasks by layer.
 2. If the API changes: update `contracts/openapi.yaml` first (or in the same PR as
    backend + all consumers).
 3. Backend: new module or extend existing slice; controller public, logic `internal`.
 4. Mobile: new or extended client in `sharedLogic`; wire UI on each platform.
 5. Web: required before merge if contract changed (once `web/` exists).
 6. Tests at each layer; manual smoke if UI/network involved.
-7. `/pr` — archive spec to `docs/specs/archive/`, open the PR, merge when CI is green.
+7. `/pr` — archive spec, update `docs/roadmap.md` Done/Active, open the PR, merge
+   when CI is green.
 
 ## Conventions (accumulate here)
 

@@ -2,6 +2,7 @@
 
 Status: draft | in-progress | done
 Created: [date]
+Parent: [docs/roadmap.md](../roadmap.md) — omit only for infra one-offs with no roadmap row
 
 ## Problem
 

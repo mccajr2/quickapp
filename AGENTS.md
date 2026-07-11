@@ -8,7 +8,7 @@ decision changes, not per-feature.
 **quickapp** is a reusable, spec-driven starter for full-stack products: a Spring
 Modulith backend, Kotlin Multiplatform mobile (Android + iOS), a React web
 client, and an OpenAPI contract. Clone it to spin up a new app; extend it with
-vertical modules and `/spec` → `/implement` workflows. The `greeting` harness is
+vertical modules and `/roadmap` → `/spec` → `/implement` workflows. The `greeting` harness is
 disposable proof of the toolchain, not the product.
 
 ## Stack
@@ -79,8 +79,11 @@ disposable proof of the toolchain, not the product.
 ## How specs work here
 
 - `main` is PR-protected. One active spec → one feature branch → one PR (`/pr`).
-- `docs/specs/active/<feature>.md` via `/spec` (on that branch), then `/implement`.
-- `docs/specs/archive/` — completed specs, kept as history.
+- `docs/roadmap.md` — single product roadmap; backlog id ↔ spec 1:1. Use
+  `/roadmap` to carve up, add ideas, and re-rank; `/spec` for one implementable
+  slice.
+- `docs/specs/planned/` — optional thin stubs; `active/` via `/spec`, then
+  `/implement`; `archive/` when done.
 - `docs/architecture.md` — longer-lived design decisions.
 
 ## Conventions

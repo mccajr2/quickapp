@@ -11,7 +11,9 @@ Steps:
    if one exists (`docs/specs/active/<feature>.md`).
 5. Commit and push to the current branch (`git push -u origin HEAD` if needed).
 6. If the spec for this feature is fully checked off, move it from
-   `docs/specs/active/` to `docs/specs/archive/` in the same commit.
+   `docs/specs/active/` to `docs/specs/archive/` in the same commit. If
+   `docs/roadmap.md` lists this id, mark it **done**, remove it from Active /
+   Upcoming, and link the archive path under Done.
 7. Open the PR with `gh pr create` (base `main`), using the spec's
    Problem/Acceptance Criteria sections as the PR description if a spec exists.
 8. Return the PR URL. Do not merge unless asked.
