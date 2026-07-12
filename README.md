@@ -1,7 +1,8 @@
 # quickapp
 
-**Spec-driven starter** for full-stack products. Clone this repo to begin a new app
-with a proven toolchain — not a one-off spike.
+**Spec-driven starter template** for full-stack products. Use this repository as a
+GitHub **Template** to spin up a new app — do not build the product inside this
+copy.
 
 | Layer | Stack |
 |-------|--------|
@@ -12,9 +13,20 @@ with a proven toolchain — not a one-off spike.
 | Workflow | `/roadmap` → `/spec` → `/implement` → `/pr` → merge |
 
 The `greeting` module and demo UI are **disposable harnesses** that prove the
-cross-stack path works. Real features get their own Modulith modules and specs.
+cross-stack path works. Real features get their own Modulith modules and specs
+in the **new** app repo.
 
-## Quick start
+## Start a new app from this template
+
+1. On GitHub: **Use this template** → create your app repository  
+   (details: [docs/using-as-template.md](docs/using-as-template.md)).
+2. Clone **that** repo; run the harness smoke test (backend + web at minimum).
+3. Rename demo identity when ready (checklist in the doc above).
+4. Fill `docs/roadmap.md` and run `/roadmap` (or `/spec` for one slice).
+5. After your first real feature is shipping, delete the greeting harness
+   (checklist in the same doc).
+
+## Quick start (harness smoke test)
 
 ```bash
 # Backend (repo root) — leave running
@@ -32,8 +44,8 @@ curl "http://localhost:8080/api/greeting?name=Android"
 
 ```bash
 cd web
-cp .env.example .env   # optional; defaults to http://localhost:8080
-npm install
+corepack enable
+npm ci                 # Node/npm pins: web/.nvmrc + packageManager
 npm run dev
 ```
 
@@ -45,6 +57,7 @@ real HTTP round-trip).
 | Doc | Purpose |
 |-----|---------|
 | [AGENTS.md](AGENTS.md) | Constitution for humans and coding agents |
+| [docs/using-as-template.md](docs/using-as-template.md) | Template → new app, rename, delete greeting |
 | [docs/roadmap.md](docs/roadmap.md) | Product backlog — carve-up, re-rank, Next up |
 | [docs/architecture.md](docs/architecture.md) | SDD workflow, module patterns, how to add features |
 | [docs/specs/](docs/specs/) | Planned stubs, active, and archived feature specs |
@@ -65,17 +78,12 @@ cd web
 npm test
 ```
 
-## Starting a new product from this repo
-
-1. Clone / copy **quickapp** as your new app repo.
-2. Read `docs/architecture.md` (“Adding a real feature”).
-3. `/roadmap` for a large product idea (or `/spec <feature-name>` for one slice).
-4. Keep `greeting` until you no longer need the harness, then delete it.
-
 ## Status
 
-Verified checkpoints: Modulith backend, KMP sharedLogic on both platforms,
-end-to-end networking (OpenAPI → REST → Ktor → native UI), path-filtered CI
-(backend / mobile / web), and a React web harness. `main` is PR-protected (one
-feature branch per active spec). Follow-ups: shared design tokens across clients,
-OpenAPI codegen, contract lint, first real product feature.
+Verified starter: Modulith backend, KMP sharedLogic, cross-stack networking,
+path-filtered CI (backend / mobile / web), React web harness, pinned web
+toolchain, and `/roadmap` workflow. `main` is PR-protected.
+
+This repo stays a **clean template**. Product work happens in repos created from
+it. Optional follow-ups for the template itself: web OpenAPI codegen, contract
+lint, shared design tokens, iOS CI.
