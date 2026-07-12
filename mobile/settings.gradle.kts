@@ -31,3 +31,7 @@ dependencyResolutionManagement {
 include(":androidApp")
 include(":sharedLogic")
 include(":sharedUI")
+
+// Fresh clones have no mobile/local.properties (gitignored). Bootstrap sdk.dir from
+// ANDROID_HOME / ANDROID_SDK_ROOT or the default Android Studio install paths.
+apply(from = "gradle/androidSdkBootstrap.settings.gradle.kts")

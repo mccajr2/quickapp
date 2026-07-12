@@ -18,10 +18,9 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 ### Android SDK (required for Gradle)
 
-Point Gradle at an installed Android SDK before any Android assemble/test task:
-
-- Set `ANDROID_HOME` / `ANDROID_SDK_ROOT`, or
-- Create a local `local.properties` with `sdk.dir=...` (gitignored — do not commit)
+Install Android Studio (or the SDK). Fresh clones auto-detect the SDK via
+`ANDROID_HOME` / `ANDROID_SDK_ROOT` or the default install path and write
+gitignored `local.properties`. Set those manually only if your SDK is elsewhere.
 
 See [docs/using-as-template.md](../docs/using-as-template.md#mobile-android-sdk-required).
 
