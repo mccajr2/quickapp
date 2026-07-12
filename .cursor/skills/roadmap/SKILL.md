@@ -1,3 +1,8 @@
+---
+name: roadmap
+description: Maintain the product roadmap and break large ideas into ranked spec slices.
+disable-model-invocation: true
+---
 Maintain the product roadmap and break large ideas into ranked spec slices.
 
 Argument (optional): free-text product idea, “re-rank”, “what’s next?”, or a
