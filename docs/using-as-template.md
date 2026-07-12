@@ -20,8 +20,8 @@ repo from the template** for each real app; leave this copy clean.
 ./gradlew :backend:bootRun
 curl "http://localhost:8080/api/greeting?name=Android"
 
-# Web (separate terminal) — Node/npm pins in web/.nvmrc + packageManager
-cd web && corepack enable && npm ci && npm run dev
+# Web (separate terminal) — Node >=20 locally; CI uses .nvmrc + packageManager
+cd web && npm ci && npm run dev
 # open http://127.0.0.1:5173/ → Fetch greeting
 ```
 

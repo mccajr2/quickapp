@@ -4,30 +4,28 @@ Vite + React + TypeScript client for quickapp.
 
 ## Toolchain
 
-Pinned like a wrapper — do not improvise versions:
+Local installs accept Node `>=20`. CI pins Node via `web/.nvmrc` and npm via
+`packageManager` + Corepack.
 
-| Pin | Where |
-|-----|--------|
-| Node `24.4.1` | `web/.nvmrc`, `package.json` → `engines` |
-| npm `11.4.2` | `package.json` → `packageManager` + `engines` |
+| What | Where | Role |
+|------|--------|------|
+| Node `>=20` | `package.json` → `engines` | Local floor — Homebrew Node 20/22/24 all work |
+| Node `24.4.1` | `web/.nvmrc` | CI (and preferred when regenerating the lockfile) |
+| npm `11.4.2` | `package.json` → `packageManager` | CI via Corepack |
 
 ```bash
-# Use the Node in .nvmrc (nvm/fnm/asdf), then:
-corepack enable
 cd web
 npm ci          # preferred when lockfile exists
 npm run dev
 ```
 
-`engine-strict=true` in `.npmrc` fails installs on the wrong Node/npm.  
-Only commit `package-lock.json` updates produced with this toolchain. CI runs
+Prefer matching `.nvmrc` when regenerating `package-lock.json`. CI runs
 `corepack enable` + `npm ci` only (never `npm install`).
 
 ## Quick start
 
 ```bash
 cp .env.example .env   # optional
-corepack enable
 npm ci                 # or npm install on first bootstrap of a new lockfile
 npm run dev
 ```

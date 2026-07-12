@@ -44,8 +44,7 @@ curl "http://localhost:8080/api/greeting?name=Android"
 
 ```bash
 cd web
-corepack enable
-npm ci                 # Node/npm pins: web/.nvmrc + packageManager
+npm ci                 # Node >=20 locally; CI uses web/.nvmrc + packageManager
 npm run dev
 ```
 
