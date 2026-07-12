@@ -1,3 +1,8 @@
+---
+name: implement
+description: Implement the next unchecked task(s) from an active spec.
+disable-model-invocation: true
+---
 Implement the next unchecked task(s) from an active spec.
 
 Argument: feature name matching a file in `docs/specs/active/`

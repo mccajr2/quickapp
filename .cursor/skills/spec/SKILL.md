@@ -1,3 +1,8 @@
+---
+name: spec
+description: Create a new feature spec (one PR-sized slice).
+disable-model-invocation: true
+---
 Create a new feature spec (one PR-sized slice).
 
 Argument: feature name (kebab-case), e.g. `add-password-reset`  

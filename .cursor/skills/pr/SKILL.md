@@ -1,3 +1,8 @@
+---
+name: pr
+description: Open a pull request for the current changes.
+disable-model-invocation: true
+---
 Open a pull request for the current changes.
 
 Steps:
