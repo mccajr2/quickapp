@@ -25,9 +25,33 @@ cd web && corepack enable && npm ci && npm run dev
 # open http://127.0.0.1:5173/ → Fetch greeting
 ```
 
-Also run Android and/or iOS once if those clients matter for the new app.
-
 Success: greeting text includes `from a Spring Modulith module.`
+
+### Mobile (Android SDK required)
+
+`mobile/local.properties` is gitignored and must not be committed. New clones
+will fail Gradle mobile tasks until the Android SDK location is set.
+
+Do **one** of the following (after installing Android Studio / the SDK):
+
+1. Export `ANDROID_HOME` (or `ANDROID_SDK_ROOT`) in your shell, e.g. on macOS:
+   ```bash
+   export ANDROID_HOME="$HOME/Library/Android/sdk"
+   ```
+2. Or create `mobile/local.properties` locally (never commit it):
+   ```properties
+   sdk.dir=/Users/you/Library/Android/sdk
+   ```
+   Opening the `mobile/` project in Android Studio also generates this file.
+
+Then:
+
+```bash
+cd mobile
+./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug
+```
+
+Run iOS once in Xcode if that client matters for the new app.
 
 ## Identity rename checklist
 
@@ -45,8 +69,8 @@ for these strings and update consistently:
 | OpenAPI `info.title` | `Quickapp API` | your API title |
 | Web `index.html` title / harness copy | `quickapp` | your product name |
 
-After renames: `./gradlew :backend:test`, mobile host tests / `assembleDebug`,
-`cd web && npm test && npm run build`.
+After renames: `./gradlew :backend:test`, mobile host tests / `assembleDebug`
+(Android SDK — see above), `cd web && npm test && npm run build`.
 
 Automation (cookiecutter/Copier) is intentionally deferred until manual rename
 hurts twice.

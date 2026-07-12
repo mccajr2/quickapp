@@ -16,6 +16,15 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
     Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./sharedUI/src/jvmMain/kotlin)
     folder is the appropriate location.
 
+### Android SDK (required for Gradle)
+
+Point Gradle at an installed Android SDK before any Android assemble/test task:
+
+- Set `ANDROID_HOME` / `ANDROID_SDK_ROOT`, or
+- Create a local `local.properties` with `sdk.dir=...` (gitignored — do not commit)
+
+See [docs/using-as-template.md](../docs/using-as-template.md#mobile-android-sdk-required).
+
 ### Running the apps
 
 Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
