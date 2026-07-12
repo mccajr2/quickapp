@@ -68,8 +68,8 @@ real HTTP round-trip).
 # Backend
 ./gradlew :backend:test
 
-# Mobile (from mobile/) — needs Android SDK via ANDROID_HOME or
-# mobile/local.properties (gitignored; see docs/using-as-template.md)
+# Mobile (from mobile/) — needs Android SDK installed; local.properties is
+# auto-generated from ANDROID_HOME or the default SDK path (see docs/using-as-template.md)
 cd mobile
 ./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug
 

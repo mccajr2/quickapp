@@ -29,20 +29,17 @@ Success: greeting text includes `from a Spring Modulith module.`
 
 ### Mobile (Android SDK required)
 
-`mobile/local.properties` is gitignored and must not be committed. New clones
-will fail Gradle mobile tasks until the Android SDK location is set.
+Install Android Studio (or the command-line SDK). On a fresh clone, mobile Gradle
+auto-detects the SDK from `ANDROID_HOME` / `ANDROID_SDK_ROOT`, or from the default
+install path (`~/Library/Android/sdk` on macOS, `~/Android/Sdk` on Linux) and
+writes gitignored `mobile/local.properties`.
 
-Do **one** of the following (after installing Android Studio / the SDK):
+Only set the SDK location manually if yours is non-standard:
 
-1. Export `ANDROID_HOME` (or `ANDROID_SDK_ROOT`) in your shell, e.g. on macOS:
-   ```bash
-   export ANDROID_HOME="$HOME/Library/Android/sdk"
-   ```
-2. Or create `mobile/local.properties` locally (never commit it):
-   ```properties
-   sdk.dir=/Users/you/Library/Android/sdk
-   ```
-   Opening the `mobile/` project in Android Studio also generates this file.
+```bash
+export ANDROID_HOME="/path/to/Android/sdk"
+# or create mobile/local.properties with sdk.dir=... (never commit it)
+```
 
 Then:
 
