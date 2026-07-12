@@ -6,10 +6,12 @@ flows through it*.
 
 ## What this repo is
 
-quickapp is an **SDD (spec-driven development) infrastructure repo**, not a
-shipped product. The `greeting` backend module and mobile demo UI are disposable
-harnesses used to prove the toolchain. Real apps reuse the same patterns:
-spec → contract → backend module → mobile/web clients → native or browser UI.
+quickapp is an **SDD (spec-driven development) starter template**, not a shipped
+product. Create a new GitHub repository from this template for each real app
+(see `docs/using-as-template.md`). The `greeting` backend module and demo UIs are
+disposable harnesses that prove the toolchain. Real apps reuse the same patterns:
+roadmap → spec → contract → backend module → mobile/web clients → native or
+browser UI.
 
 Three checkpoints are verified in git:
 
@@ -39,7 +41,9 @@ quickapp/
 ├── build-logic/          # Backend convention plugins
 ├── docs/
 │   ├── architecture.md   # ← this file
-│   └── specs/            # active/ + archive/
+│   ├── using-as-template.md
+│   ├── roadmap.md        # product backlog (empty on the template)
+│   └── specs/            # planned/ + active/ + archive/
 └── web/                  # Vite + React + TypeScript (npm; separate from Gradle)
 ```
 
@@ -301,7 +305,8 @@ First CI step when ready: Spectral on `contracts/openapi.yaml` for validity/styl
 
 ## Adding a real feature (checklist)
 
-Use this after the harness is no longer sufficient:
+Use this **in a repo created from the template**, after the harness smoke test
+passes (see `docs/using-as-template.md`):
 
 1. `/roadmap` if the idea is multi-slice; else `/spec <feature-name>` — feature
    branch, scope, non-goals, acceptance criteria, tasks by layer.

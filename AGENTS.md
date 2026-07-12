@@ -5,11 +5,13 @@ decision changes, not per-feature.
 
 ## What this is
 
-**quickapp** is a reusable, spec-driven starter for full-stack products: a Spring
-Modulith backend, Kotlin Multiplatform mobile (Android + iOS), a React web
-client, and an OpenAPI contract. Clone it to spin up a new app; extend it with
-vertical modules and `/roadmap` → `/spec` → `/implement` workflows. The `greeting` harness is
-disposable proof of the toolchain, not the product.
+**quickapp** is a reusable, spec-driven **starter template** for full-stack
+products: a Spring Modulith backend, Kotlin Multiplatform mobile (Android + iOS),
+a React web client, and an OpenAPI contract. Create a **new repository from this
+template** for each real app; do not grow a product inside the template clone.
+Extend with vertical modules and `/roadmap` → `/spec` → `/implement` workflows.
+The `greeting` harness is disposable proof of the toolchain, not the product —
+see `docs/using-as-template.md`.
 
 ## Stack
 
@@ -81,7 +83,10 @@ disposable proof of the toolchain, not the product.
 - `main` is PR-protected. One active spec → one feature branch → one PR (`/pr`).
 - `docs/roadmap.md` — single product roadmap; backlog id ↔ spec 1:1. Use
   `/roadmap` to carve up, add ideas, and re-rank; `/spec` for one implementable
-  slice.
+  slice. On the **template** repo, keep the backlog empty of product features;
+  carve up in each new app repo.
+- `docs/using-as-template.md` — how to create an app from this template, rename
+  identity, and delete the greeting harness.
 - `docs/specs/planned/` — optional thin stubs; `active/` via `/spec`, then
   `/implement`; `archive/` when done.
 - `docs/architecture.md` — longer-lived design decisions.
