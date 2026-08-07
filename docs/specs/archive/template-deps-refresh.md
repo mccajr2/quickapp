@@ -1,6 +1,6 @@
 # Spec: template-deps-refresh
 
-Status: in-progress  
+Status: complete  
 Created: 2026-08-07  
 Added: 2026-08-07 · enhancement  
 Parent: omit (infra one-off for the starter template; keep product backlog empty)
@@ -63,7 +63,7 @@ No OpenAPI / contract changes.
 - [x] `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug`
       passes (same command as CI)
 - [x] `./gradlew :backend:test` passes (at least Modulith + existing suite)
-- [ ] Dependabot PRs #11–#18 are closed as superseded by this change (after this
+- [x] Dependabot PRs #11–#18 are closed as superseded by this change (after this
       PR is open/merged)
 
 ## Tasks
@@ -75,7 +75,7 @@ No OpenAPI / contract changes.
 - [x] Mobile: apply #17/#18 catalog bumps; set AGP ≥ 9.1.0 and compileSdk/targetSdk 37
 - [x] Mobile: apply Gradle wrapper bump if present in #17
 - [x] Tests: backend `:backend:test`; web test/lint/build; mobile host tests + assembleDebug
-- [ ] Housekeeping: open this PR; close Dependabot #11–#18 as superseded
+- [x] Housekeeping: open this PR; close Dependabot #11–#18 as superseded
 
 ## Open questions
 
