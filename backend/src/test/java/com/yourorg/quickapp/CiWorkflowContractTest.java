@@ -51,6 +51,25 @@ class CiWorkflowContractTest {
         assertThat(web).doesNotContain("actions/setup-node@v4");
     }
 
+    @Test
+    void webToolchainPinsSatisfyJsdom30NodeFloor() throws IOException {
+        Path nvmrc = resolveRepoFile("web", ".nvmrc");
+        Path packageJson = resolveRepoFile("web", "package.json");
+        assertThat(nvmrc).exists();
+        assertThat(packageJson).exists();
+
+        String pin = Files.readString(nvmrc).trim();
+        assertThat(pin).isEqualTo("24.19.0");
+
+        String pkg = Files.readString(packageJson);
+        // jsdom 30 rejects Node 20 and Node 24 below 24.15 — keep engines aligned.
+        assertThat(pkg).contains("\"node\": \"^22.22.2 || ^24.15.0 || >=26.0.0\"");
+        assertThat(pkg).contains("\"jsdom\": \"^30.0.1\"");
+        assertThat(pkg).contains("\"@testing-library/jest-dom\": \"^7.0.0\"");
+        assertThat(pkg).contains("\"@testing-library/dom\": \"^10.4.1\"");
+        assertThat(pkg).doesNotContain("\"node\": \">=20\"");
+    }
+
     private static Path resolveBackendWorkflow() {
         return resolveWorkflow("backend.yml");
     }
@@ -60,11 +79,22 @@ class CiWorkflowContractTest {
     }
 
     private static Path resolveWorkflow(String filename) {
-        Path fromBackend =
-                Path.of("..", ".github", "workflows", filename).normalize().toAbsolutePath();
+        return resolveRepoFile(".github", "workflows", filename);
+    }
+
+    private static Path resolveRepoFile(String first, String... more) {
+        Path fromBackend = Path.of("..", first);
+        for (String part : more) {
+            fromBackend = fromBackend.resolve(part);
+        }
+        fromBackend = fromBackend.normalize().toAbsolutePath();
         if (Files.exists(fromBackend)) {
             return fromBackend;
         }
-        return Path.of(".github", "workflows", filename).toAbsolutePath();
+        Path fromRoot = Path.of(first);
+        for (String part : more) {
+            fromRoot = fromRoot.resolve(part);
+        }
+        return fromRoot.toAbsolutePath();
     }
 }
