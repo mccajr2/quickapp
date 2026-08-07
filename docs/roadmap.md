@@ -7,6 +7,7 @@ Living backlog for this product repo. **One roadmap ↔ many specs** (1:1 by
 kebab-case id). `/roadmap` updates and re-ranks; `/spec <id>` fleshes out the
 next slice. Do not turn this file into a mega-spec.
 
+
 ## Vision
 
 This repository is the **quickapp starter template** — not a product. New apps
@@ -43,7 +44,7 @@ In-progress work (locked for re-rank — finish, amend, or abandon before reshuf
 
 | Id | Branch | Spec |
 |----|--------|------|
-| — | — | — |
+| template-deps-refresh | `template-deps-refresh` | [active](specs/active/template-deps-refresh.md) |
 
 ## Done
 
