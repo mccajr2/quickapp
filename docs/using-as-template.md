@@ -8,8 +8,9 @@ repo from the template** for each real app; leave this copy clean.
 1. On GitHub: **Use this template** → create a new repository  
    (or: `gh repo create <org>/<new-app> --template <owner>/quickapp --private`)
 2. Clone the **new** repo (not a long-lived fork of quickapp).
-3. Confirm CI workflows exist under `.github/workflows/` and `main` is protected
-   (require PR; optionally require `backend` / `mobile` / `web` checks).
+3. Confirm CI workflows exist under `.github/workflows/` (including **secrets**)
+   and `main` is protected (require PR; optionally require `backend` / `mobile` /
+   `web` / `secrets` checks). Enable Dependabot alerts in repo Settings if desired.
 4. Smoke-test the harness (below), then start product work with `/roadmap` or
    `/spec`.
 
