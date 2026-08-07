@@ -1,6 +1,6 @@
 # Spec: template-ci-hygiene
 
-Status: in-progress  
+Status: complete  
 Created: 2026-08-07  
 Added: 2026-08-07 · enhancement  
 Parent: omit (infra one-off for the starter template; keep product backlog empty)
@@ -31,17 +31,17 @@ Port proven FI hygiene into the template:
 
 ## Acceptance criteria
 
-- [ ] Secrets workflow exists, pinned gitleaks Action, no `paths:` under `on:`
-- [ ] Backend workflow path filters include `contracts/**` (push + PR)
-- [ ] Dependabot config present for web npm, root Gradle, mobile Gradle, Actions
-- [ ] Web Vitest setup stubs `matchMedia` when missing
-- [ ] Architecture CI docs mention secrets + contracts path filter
-- [ ] Structural JUnit tests cover secrets + contracts filters
+- [x] Secrets workflow exists, pinned gitleaks Action, no `paths:` under `on:`
+- [x] Backend workflow path filters include `contracts/**` (push + PR)
+- [x] Dependabot config present for web npm, root Gradle, mobile Gradle, Actions
+- [x] Web Vitest setup stubs `matchMedia` when missing
+- [x] Architecture CI docs mention secrets + contracts path filter
+- [x] Structural JUnit tests cover secrets + contracts filters
 
 ## Tasks
 
-- [ ] CI: secrets.yml + architecture note
-- [ ] CI: contracts/** on backend.yml + architecture note
-- [ ] CI: dependabot.yml
-- [ ] Web: matchMedia stub in test setup
-- [ ] Tests: CiWorkflowContractTest (secrets + contracts filters)
+- [x] CI: secrets.yml + architecture note
+- [x] CI: contracts/** on backend.yml + architecture note
+- [x] CI: dependabot.yml
+- [x] Web: matchMedia stub in test setup
+- [x] Tests: CiWorkflowContractTest (secrets + contracts filters)
