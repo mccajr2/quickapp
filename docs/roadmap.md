@@ -1,7 +1,7 @@
 # Product roadmap
 
 Status: active  
-Updated: 2026-07-10
+Updated: 2026-08-07
 
 Living backlog for this product repo. **One roadmap ↔ many specs** (1:1 by
 kebab-case id). `/roadmap` updates and re-ranks; `/spec <id>` fleshes out the
@@ -49,6 +49,7 @@ In-progress work (locked for re-rank — finish, amend, or abandon before reshuf
 
 | Id | Completed | Spec |
 |----|-----------|------|
+| template-ci-hygiene | 2026-08-07 | [archive](specs/archive/template-ci-hygiene.md) |
 | template-packaging | 2026-07-11 | [archive](specs/archive/template-packaging.md) |
 | path-filtered-ci | 2026-07-10 | [archive](specs/archive/path-filtered-ci.md) |
 | web-scaffold | 2026-07-10 | [archive](specs/archive/web-scaffold.md) |
@@ -62,3 +63,4 @@ Only notable events (first carve-up, major re-rank, cancelled theme) — not eve
 |------|--------|
 | 2026-07-10 | Roadmap file introduced (empty product backlog; infra specs recorded under Done). |
 | 2026-07-11 | Template packaging: Vision/non-goals clarify upstream is a starter template. |
+| 2026-08-07 | Template CI hygiene archived (secrets scan, contracts path filter, Dependabot). |
