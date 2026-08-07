@@ -1,6 +1,6 @@
 # Spec: template-deps-refresh
 
-Status: draft  
+Status: in-progress  
 Created: 2026-08-07  
 Added: 2026-08-07 · enhancement  
 Parent: omit (infra one-off for the starter template; keep product backlog empty)
@@ -51,30 +51,30 @@ No OpenAPI / contract changes.
 
 ## Acceptance criteria
 
-- [ ] Spring Modulith is `2.1.0` (core + test starters via shared version ref)
-- [ ] Backend, mobile, and web workflows use `actions/checkout@v7`; web uses
+- [x] Spring Modulith is `2.1.0` (core + test starters via shared version ref)
+- [x] Backend, mobile, and web workflows use `actions/checkout@v7`; web uses
       `actions/setup-node@v7`
-- [ ] Web production and development Dependabot bumps from #13/#14 are applied
-- [ ] `@types/node` is on the 26.x line; `typescript` is on 7.x
-- [ ] `web/tsconfig.app.json` has no `baseUrl`; `@/*` path mapping still works
-- [ ] `cd web && npm ci && npm test && npm run lint && npm run build` pass
-- [ ] Mobile catalog includes lifecycle `2.11.0`, the #17 group bumps, AGP ≥ 9.1.0,
+- [x] Web production and development Dependabot bumps from #13/#14 are applied
+- [x] `@types/node` is on the 26.x line; `typescript` is on 7.x
+- [x] `web/tsconfig.app.json` has no `baseUrl`; `@/*` path mapping still works
+- [x] `cd web && npm ci && npm test && npm run lint && npm run build` pass
+- [x] Mobile catalog includes lifecycle `2.11.0`, the #17 group bumps, AGP ≥ 9.1.0,
       and compileSdk 37
-- [ ] `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug`
+- [x] `cd mobile && ./gradlew :sharedLogic:testAndroidHostTest :androidApp:assembleDebug`
       passes (same command as CI)
-- [ ] `./gradlew :backend:test` passes (at least Modulith + existing suite)
+- [x] `./gradlew :backend:test` passes (at least Modulith + existing suite)
 - [ ] Dependabot PRs #11–#18 are closed as superseded by this change (after this
       PR is open/merged)
 
 ## Tasks
 
-- [ ] Backend: bump Spring Modulith in `gradle/libs.versions.toml`
-- [ ] CI: bump checkout/setup-node in `.github/workflows/{backend,mobile,web}.yml`
-- [ ] Web: apply #13/#14/#15/#16 version pins in `web/package.json` + lockfile
-- [ ] Web: remove `baseUrl` + `ignoreDeprecations` for TypeScript 7
-- [ ] Mobile: apply #17/#18 catalog bumps; set AGP ≥ 9.1.0 and compileSdk/targetSdk 37
-- [ ] Mobile: apply Gradle wrapper bump if present in #17
-- [ ] Tests: backend `:backend:test`; web test/lint/build; mobile host tests + assembleDebug
+- [x] Backend: bump Spring Modulith in `gradle/libs.versions.toml`
+- [x] CI: bump checkout/setup-node in `.github/workflows/{backend,mobile,web}.yml`
+- [x] Web: apply #13/#14/#15/#16 version pins in `web/package.json` + lockfile
+- [x] Web: remove `baseUrl` + `ignoreDeprecations` for TypeScript 7
+- [x] Mobile: apply #17/#18 catalog bumps; set AGP ≥ 9.1.0 and compileSdk/targetSdk 37
+- [x] Mobile: apply Gradle wrapper bump if present in #17
+- [x] Tests: backend `:backend:test`; web test/lint/build; mobile host tests + assembleDebug
 - [ ] Housekeeping: open this PR; close Dependabot #11–#18 as superseded
 
 ## Open questions

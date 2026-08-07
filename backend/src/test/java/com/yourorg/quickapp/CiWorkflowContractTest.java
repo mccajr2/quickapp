@@ -35,21 +35,36 @@ class CiWorkflowContractTest {
         assertThat(yaml).doesNotContain("@master");
     }
 
+    @Test
+    void pathFilteredWorkflowsUseCheckoutV7AndWebUsesSetupNodeV7() throws IOException {
+        String backend = Files.readString(resolveBackendWorkflow());
+        String mobile = Files.readString(resolveWorkflow("mobile.yml"));
+        String web = Files.readString(resolveWorkflow("web.yml"));
+
+        assertThat(backend).contains("actions/checkout@v7");
+        assertThat(mobile).contains("actions/checkout@v7");
+        assertThat(web).contains("actions/checkout@v7");
+        assertThat(web).contains("actions/setup-node@v7");
+        assertThat(backend).doesNotContain("actions/checkout@v4");
+        assertThat(mobile).doesNotContain("actions/checkout@v4");
+        assertThat(web).doesNotContain("actions/checkout@v4");
+        assertThat(web).doesNotContain("actions/setup-node@v4");
+    }
+
     private static Path resolveBackendWorkflow() {
-        Path fromBackend =
-                Path.of("..", ".github", "workflows", "backend.yml").normalize().toAbsolutePath();
-        if (Files.exists(fromBackend)) {
-            return fromBackend;
-        }
-        return Path.of(".github", "workflows", "backend.yml").toAbsolutePath();
+        return resolveWorkflow("backend.yml");
     }
 
     private static Path resolveSecretsWorkflow() {
+        return resolveWorkflow("secrets.yml");
+    }
+
+    private static Path resolveWorkflow(String filename) {
         Path fromBackend =
-                Path.of("..", ".github", "workflows", "secrets.yml").normalize().toAbsolutePath();
+                Path.of("..", ".github", "workflows", filename).normalize().toAbsolutePath();
         if (Files.exists(fromBackend)) {
             return fromBackend;
         }
-        return Path.of(".github", "workflows", "secrets.yml").toAbsolutePath();
+        return Path.of(".github", "workflows", filename).toAbsolutePath();
     }
 }
